@@ -1,0 +1,1 @@
+ncftpput -R -v -u FTP_USER -p FTP_PASS FTP_URL backup/eth backup/*
