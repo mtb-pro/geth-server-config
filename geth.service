@@ -1,0 +1,21 @@
+[Unit]
+Description=Ethereum go client(For eth network)
+After=network.target
+
+[Service]
+# run as root, set base_path in config.toml
+ExecStart=/data/eth/geth --syncmode full --cache=32768 --config /data/eth/config.toml --datadir /data/eth/node --keystore /data/eth/keystore/ --nat extip:62.3.41.12 --rpc  --rpcport 8545 --rpcaddr "0.0.0.0" --maxpeers 60 --cache 12288 --txlookuplimit 0
+# --diffsync --cache 12288 --txlookuplimit 0
+# To run as user, comment out above and uncomment below, fill in user and group
+# picks up users default config.toml in $HOME/.local/share/io.parity.ethereum/
+# User=username
+# Group=groupname
+# ExecStart=/usr/bin/parity
+Restart=on-failure
+
+# Specifies which signal to use when killing a service. Defaults to SIGTERM.
+# SIGHUP gives parity time to exit cleanly before SIGKILL (default 90s)
+KillSignal=SIGHUP
+
+[Install]
+WantedBy=default.target
